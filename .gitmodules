@@ -1,0 +1,6 @@
+[submodule "raw/dplace"]
+	path = raw/dplace
+	url = https://github.com/D-PLACE/dplace-data
+[submodule "raw/gjb"]
+	path = raw/gjb
+	url = https://github.com/theglobaljukebox/cantometrics

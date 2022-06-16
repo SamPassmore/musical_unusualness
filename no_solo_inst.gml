@@ -1,4 +1,4 @@
-Creator "igraph version 1.2.11.9145 Thu Jun 16 12:17:47 2022"
+Creator "igraph version 1.2.11.9145 Thu Jun 16 12:17:52 2022"
 Version 1
 graph
 [
@@ -8,7 +8,7 @@ graph
     id 0
     name "line_1"
     category "Social organization"
-    cluster 4
+    cluster 1
     shortname "Social Org. (V)"
   ]
   node
@@ -16,7 +16,7 @@ graph
     id 1
     name "line_10"
     category "Social organization"
-    cluster 1
+    cluster 2
     shortname "Text Reptition"
   ]
   node
@@ -24,7 +24,7 @@ graph
     id 2
     name "line_11"
     category "Metrical pattern"
-    cluster 4
+    cluster 1
     shortname "Overall Rhythm (V)"
   ]
   node
@@ -32,7 +32,7 @@ graph
     id 3
     name "line_12"
     category "Rhythmic relationship"
-    cluster 4
+    cluster 1
     shortname "Rhythm (V)"
   ]
   node
@@ -40,7 +40,7 @@ graph
     id 4
     name "line_13"
     category "Metrical pattern"
-    cluster 2
+    cluster 3
     shortname "Rhythm (O)"
   ]
   node
@@ -48,7 +48,7 @@ graph
     id 5
     name "line_14"
     category "Rhythmic relationship"
-    cluster 2
+    cluster 3
     shortname "Overall Rhythm (O)"
   ]
   node
@@ -56,87 +56,87 @@ graph
     id 6
     name "line_16"
     category "Melodic form"
-    cluster 1
+    cluster 2
     shortname "Melodic form"
   ]
   node
   [
     id 7
-    name "line_17"
-    category "Metrical pattern"
-    cluster 3
-    shortname "Phrase length"
-  ]
-  node
-  [
-    id 8
     name "line_18"
     category "Melodic form"
-    cluster 1
+    cluster 2
     shortname "Number of phrases"
   ]
   node
   [
-    id 9
+    id 8
     name "line_2"
     category "Orchestra"
-    cluster 2
+    cluster 3
     shortname "Orches. To Vocals"
   ]
   node
   [
-    id 10
+    id 9
     name "line_21"
     category "Articulation"
-    cluster 3
+    cluster 1
     shortname "Interval size"
   ]
   node
   [
-    id 11
+    id 10
     name "line_22"
     category "Musical characterstics"
-    cluster 4
+    cluster 1
     shortname "Polyphonic type"
   ]
   node
   [
-    id 12
+    id 11
     name "line_23"
     category "Ornament"
-    cluster 3
+    cluster 4
     shortname "Embellishment"
   ]
   node
   [
-    id 13
+    id 12
     name "line_24"
     category "Dynamics"
-    cluster 3
+    cluster 4
     shortname "Tempo"
   ]
   node
   [
-    id 14
+    id 13
     name "line_25"
     category "Dynamics"
-    cluster 2
+    cluster 3
     shortname "Volume"
   ]
   node
   [
-    id 15
+    id 14
     name "line_26"
     category "Metrical pattern"
-    cluster 3
+    cluster 4
     shortname "Rubato: vocal"
+  ]
+  node
+  [
+    id 15
+    name "line_27"
+    category "Metrical pattern"
+    cluster 4
+    shortname "Rubato: orchestra"
   ]
   node
   [
     id 16
     name "line_28"
     category "Ornament"
-    cluster 3
+    cluster 4
     shortname "Glissando"
   ]
   node
@@ -144,7 +144,7 @@ graph
     id 17
     name "line_29"
     category "Ornament"
-    cluster 3
+    cluster 4
     shortname "Melisma"
   ]
   node
@@ -152,7 +152,7 @@ graph
     id 18
     name "line_3"
     category "Orchestra"
-    cluster 2
+    cluster 3
     shortname "Social Org. (O)"
   ]
   node
@@ -160,7 +160,7 @@ graph
     id 19
     name "line_30"
     category "Ornament"
-    cluster 1
+    cluster 2
     shortname "Tremolo"
   ]
   node
@@ -168,7 +168,7 @@ graph
     id 20
     name "line_31"
     category "Ornament"
-    cluster 3
+    cluster 4
     shortname "Glottal"
   ]
   node
@@ -176,7 +176,7 @@ graph
     id 21
     name "line_33"
     category "Vocal noise"
-    cluster 4
+    cluster 1
     shortname "Vocal width"
   ]
   node
@@ -184,7 +184,7 @@ graph
     id 22
     name "line_34"
     category "Vocal noise"
-    cluster 4
+    cluster 1
     shortname "Nasality"
   ]
   node
@@ -192,7 +192,7 @@ graph
     id 23
     name "line_35"
     category "Vocal noise"
-    cluster 4
+    cluster 1
     shortname "Rasp"
   ]
   node
@@ -200,7 +200,7 @@ graph
     id 24
     name "line_36"
     category "Dynamics"
-    cluster 4
+    cluster 1
     shortname "Accent"
   ]
   node
@@ -208,7 +208,7 @@ graph
     id 25
     name "line_37"
     category "Articulation"
-    cluster 1
+    cluster 2
     shortname "Enunciation"
   ]
   node
@@ -216,7 +216,7 @@ graph
     id 26
     name "line_4"
     category "Musical organization"
-    cluster 4
+    cluster 1
     shortname "Musical Org. (V)"
   ]
   node
@@ -224,7 +224,7 @@ graph
     id 27
     name "line_5"
     category "Musical organization"
-    cluster 4
+    cluster 1
     shortname "Tonal Blend (V)"
   ]
   node
@@ -240,7 +240,7 @@ graph
     id 29
     name "line_7"
     category "Musical organization"
-    cluster 2
+    cluster 3
     shortname "Musical Org. (O)"
   ]
   node
@@ -248,7 +248,7 @@ graph
     id 30
     name "line_8"
     category "Musical organization"
-    cluster 2
+    cluster 3
     shortname "Tonal Blend (O)"
   ]
   node
@@ -256,481 +256,403 @@ graph
     id 31
     name "line_9"
     category "Orchestra"
-    cluster 2
+    cluster 3
     shortname "Rhythm Coord (O)"
-  ]
-  edge
-  [
-    source 1
-    target 0
-    weight 0.361792982660155
   ]
   edge
   [
     source 3
     target 0
-    weight 0.679848321009344
+    weight 0.534241534494254
   ]
   edge
   [
-    source 11
+    source 6
     target 0
-    weight 0.568533554151594
+    weight 0.309179741160068
   ]
   edge
   [
-    source 19
+    source 10
     target 0
-    weight 0.361489030535102
+    weight 0.471504696439747
   ]
   edge
   [
-    source 25
+    source 18
     target 0
-    weight 0.317658171226384
+    weight 0.302210192325351
   ]
   edge
   [
     source 26
     target 0
-    weight 0.740398354700268
+    weight 0.445815390859233
   ]
   edge
   [
     source 27
     target 0
-    weight 0.761126982027245
+    weight 0.381066171715799
   ]
   edge
   [
     source 28
     target 0
-    weight 0.742679967210699
+    weight 0.36021941889059
   ]
   edge
   [
-    source 30
-    target 0
-    weight 0.303572698801819
-  ]
-  edge
-  [
-    source 12
+    source 6
     target 1
-    weight 0.307420725394332
+    weight 0.325547818312596
+  ]
+  edge
+  [
+    source 11
+    target 1
+    weight 0.30818811987634
   ]
   edge
   [
     source 19
     target 1
-    weight 0.976472513530173
+    weight 0.972973753752299
   ]
   edge
   [
     source 25
     target 1
-    weight 0.497776306133062
+    weight 0.456715039899681
   ]
   edge
   [
-    source 27
-    target 1
-    weight 0.305665860472772
+    source 14
+    target 2
+    weight -0.443865374047471
   ]
   edge
   [
     source 28
-    target 1
-    weight 0.308226693750402
+    target 2
+    weight -0.307639597974412
   ]
   edge
   [
-    source 7
-    target 2
-    weight -0.313869085914611
+    source 10
+    target 3
+    weight 0.590444220227651
   ]
   edge
   [
-    source 13
-    target 2
-    weight -0.332399056484108
+    source 26
+    target 3
+    weight 0.451396664041975
   ]
   edge
   [
     source 15
-    target 2
-    weight -0.566699450838131
-  ]
-  edge
-  [
-    source 31
-    target 2
-    weight -0.30589061564004
-  ]
-  edge
-  [
-    source 11
-    target 3
-    weight 0.66704311005793
-  ]
-  edge
-  [
-    source 26
-    target 3
-    weight 0.630425418378455
-  ]
-  edge
-  [
-    source 27
-    target 3
-    weight 0.527560667865801
-  ]
-  edge
-  [
-    source 28
-    target 3
-    weight 0.489492850159574
-  ]
-  edge
-  [
-    source 5
     target 4
-    weight 0.505025332363281
-  ]
-  edge
-  [
-    source 9
-    target 4
-    weight 0.589397047444924
-  ]
-  edge
-  [
-    source 18
-    target 4
-    weight 0.538396138066197
-  ]
-  edge
-  [
-    source 29
-    target 4
-    weight 0.694669633003006
-  ]
-  edge
-  [
-    source 30
-    target 4
-    weight 0.450281574643904
-  ]
-  edge
-  [
-    source 31
-    target 4
-    weight 0.483890445058038
-  ]
-  edge
-  [
-    source 9
-    target 5
-    weight 0.608038146541888
-  ]
-  edge
-  [
-    source 18
-    target 5
-    weight 0.829044141092095
-  ]
-  edge
-  [
-    source 29
-    target 5
-    weight 0.769344296699408
-  ]
-  edge
-  [
-    source 30
-    target 5
-    weight 0.73303370451
-  ]
-  edge
-  [
-    source 31
-    target 5
-    weight 0.835701427471743
+    weight -0.303327415755427
   ]
   edge
   [
     source 8
-    target 6
-    weight 0.844542338970515
-  ]
-  edge
-  [
-    source 13
-    target 7
-    weight 0.355142713576743
-  ]
-  edge
-  [
-    source 15
-    target 7
-    weight 0.34730613704852
+    target 5
+    weight 0.406038765811009
   ]
   edge
   [
     source 18
-    target 9
-    weight 0.693668008268182
+    target 5
+    weight 0.675871696135777
   ]
   edge
   [
     source 29
-    target 9
-    weight 0.641551386366229
+    target 5
+    weight 0.690113470856874
   ]
   edge
   [
     source 30
-    target 9
-    weight 0.493908018598577
+    target 5
+    weight 0.455029538988733
   ]
   edge
   [
     source 31
-    target 9
-    weight 0.533964261061143
+    target 5
+    weight 0.670325749262989
   ]
   edge
   [
-    source 12
-    target 10
-    weight 0.333736716059602
-  ]
-  edge
-  [
-    source 21
-    target 11
-    weight 0.326540330471935
-  ]
-  edge
-  [
-    source 26
-    target 11
-    weight 0.803727453415709
-  ]
-  edge
-  [
-    source 27
-    target 11
-    weight 0.518605715971995
-  ]
-  edge
-  [
-    source 28
-    target 11
-    weight 0.484356447523011
-  ]
-  edge
-  [
-    source 15
-    target 12
-    weight 0.365350668344088
-  ]
-  edge
-  [
-    source 16
-    target 12
-    weight 0.356967679116486
-  ]
-  edge
-  [
-    source 17
-    target 12
-    weight 0.410087480953905
+    source 7
+    target 6
+    weight 0.836386014268578
   ]
   edge
   [
     source 19
-    target 12
-    weight 0.305073137359407
+    target 6
+    weight 0.319410804974168
   ]
   edge
   [
-    source 20
-    target 12
-    weight 0.484047605988606
+    source 18
+    target 8
+    weight 0.520357728491627
+  ]
+  edge
+  [
+    source 29
+    target 8
+    weight 0.333447507878332
+  ]
+  edge
+  [
+    source 11
+    target 9
+    weight 0.303061223265227
   ]
   edge
   [
     source 21
-    target 12
-    weight 0.353192506001123
+    target 10
+    weight 0.393038442514957
+  ]
+  edge
+  [
+    source 26
+    target 10
+    weight 0.823303001093339
   ]
   edge
   [
     source 27
-    target 12
-    weight 0.321583642799565
+    target 10
+    weight 0.413001149661174
   ]
   edge
   [
     source 28
-    target 12
-    weight 0.337394216066746
-  ]
-  edge
-  [
-    source 15
-    target 13
-    weight 0.495913435109215
-  ]
-  edge
-  [
-    source 24
-    target 14
-    weight -0.541791382032363
+    target 10
+    weight 0.338225826866612
   ]
   edge
   [
     source 16
-    target 15
-    weight 0.357982056052392
+    target 11
+    weight 0.359789032018805
   ]
   edge
   [
     source 17
-    target 15
-    weight 0.338531019965865
+    target 11
+    weight 0.317277692902569
+  ]
+  edge
+  [
+    source 19
+    target 11
+    weight 0.301025311358057
+  ]
+  edge
+  [
+    source 20
+    target 11
+    weight 0.453081327241767
+  ]
+  edge
+  [
+    source 21
+    target 11
+    weight 0.473734321355902
+  ]
+  edge
+  [
+    source 22
+    target 11
+    weight 0.356370712986288
+  ]
+  edge
+  [
+    source 27
+    target 11
+    weight 0.335518045074651
   ]
   edge
   [
     source 28
-    target 15
-    weight 0.361972387319812
+    target 11
+    weight 0.3314106848675
+  ]
+  edge
+  [
+    source 14
+    target 12
+    weight 0.362073358833912
+  ]
+  edge
+  [
+    source 24
+    target 13
+    weight -0.501025677321215
+  ]
+  edge
+  [
+    source 15
+    target 14
+    weight 0.566783434355513
+  ]
+  edge
+  [
+    source 16
+    target 14
+    weight 0.348841604261509
+  ]
+  edge
+  [
+    source 28
+    target 14
+    weight 0.439340378754269
   ]
   edge
   [
     source 31
     target 15
-    weight 0.321461600767242
+    weight 0.320660747712338
   ]
   edge
   [
     source 17
     target 16
-    weight 0.368336239278161
+    weight 0.371746894068367
+  ]
+  edge
+  [
+    source 28
+    target 16
+    weight 0.302055334784767
   ]
   edge
   [
     source 29
     target 18
-    weight 0.759421231138831
+    weight 0.515556773085196
   ]
   edge
   [
     source 30
     target 18
-    weight 0.818518891342884
+    weight 0.576023622931903
   ]
   edge
   [
     source 31
     target 18
-    weight 0.832584655125814
+    weight 0.616498493223488
   ]
   edge
   [
     source 25
     target 19
-    weight 0.486221174777044
-  ]
-  edge
-  [
-    source 27
-    target 19
-    weight 0.306845992336205
-  ]
-  edge
-  [
-    source 28
-    target 19
-    weight 0.308835499562431
+    weight 0.444221703839195
   ]
   edge
   [
     source 22
     target 21
-    weight 0.49579889176692
+    weight 0.536150087637436
   ]
   edge
   [
     source 23
     target 21
-    weight 0.311996116398212
+    weight 0.376940712892423
+  ]
+  edge
+  [
+    source 26
+    target 21
+    weight 0.336799035300311
   ]
   edge
   [
     source 27
     target 21
-    weight 0.323948263858709
+    weight 0.50871707511291
+  ]
+  edge
+  [
+    source 28
+    target 21
+    weight 0.412969238374911
   ]
   edge
   [
     source 23
     target 22
-    weight 0.586102909930667
+    weight 0.640133356200716
   ]
   edge
   [
     source 27
     target 22
-    weight 0.357723208849033
+    weight 0.442396990309287
   ]
   edge
   [
     source 28
     target 22
-    weight 0.306801043516558
+    weight 0.330436433143204
+  ]
+  edge
+  [
+    source 24
+    target 23
+    weight 0.34291762777737
   ]
   edge
   [
     source 27
     target 26
-    weight 0.748438534847795
+    weight 0.472003517841152
   ]
   edge
   [
     source 28
     target 26
-    weight 0.714181684476637
+    weight 0.396382146998115
   ]
   edge
   [
     source 28
     target 27
-    weight 0.896871655067816
+    weight 0.745884104033837
   ]
   edge
   [
-    source 30
+    source 31
     target 28
-    weight 0.314489123892693
+    weight 0.30080364957995
   ]
   edge
   [
     source 30
     target 29
-    weight 0.690763950286752
+    weight 0.349505727071922
   ]
   edge
   [
     source 31
     target 29
-    weight 0.754598068406583
+    weight 0.522563095982181
   ]
   edge
   [
     source 31
     target 30
-    weight 0.905712425866969
+    weight 0.779775776834568
   ]
 ]

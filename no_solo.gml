@@ -1,4 +1,4 @@
-Creator "igraph version 1.2.11.9145 Mon Jun  6 12:02:59 2022"
+Creator "igraph version 1.2.11.9145 Thu Jun 16 12:17:50 2022"
 Version 1
 graph
 [
@@ -56,7 +56,7 @@ graph
     id 6
     name "line_16"
     category "Melodic form"
-    cluster 3
+    cluster 2
     shortname "Melodic form"
   ]
   node
@@ -64,7 +64,7 @@ graph
     id 7
     name "line_17"
     category "Metrical pattern"
-    cluster 2
+    cluster 5
     shortname "Phrase length"
   ]
   node
@@ -72,7 +72,7 @@ graph
     id 8
     name "line_18"
     category "Melodic form"
-    cluster 3
+    cluster 2
     shortname "Number of phrases"
   ]
   node
@@ -96,7 +96,7 @@ graph
     id 11
     name "line_23"
     category "Ornament"
-    cluster 2
+    cluster 5
     shortname "Embellishment"
   ]
   node
@@ -104,7 +104,7 @@ graph
     id 12
     name "line_24"
     category "Dynamics"
-    cluster 2
+    cluster 5
     shortname "Tempo"
   ]
   node
@@ -120,7 +120,7 @@ graph
     id 14
     name "line_26"
     category "Metrical pattern"
-    cluster 2
+    cluster 5
     shortname "Rubato: vocal"
   ]
   node
@@ -128,7 +128,7 @@ graph
     id 15
     name "line_28"
     category "Ornament"
-    cluster 2
+    cluster 5
     shortname "Glissando"
   ]
   node
@@ -136,7 +136,7 @@ graph
     id 16
     name "line_29"
     category "Ornament"
-    cluster 2
+    cluster 5
     shortname "Melisma"
   ]
   node
@@ -160,7 +160,7 @@ graph
     id 19
     name "line_31"
     category "Ornament"
-    cluster 2
+    cluster 5
     shortname "Glottal"
   ]
   node

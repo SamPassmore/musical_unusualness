@@ -1,4 +1,4 @@
-Creator "igraph version 1.2.11.9145 Fri May 20 16:02:57 2022"
+Creator "igraph version 1.2.11.9145 Thu Jun 16 12:17:53 2022"
 Version 1
 graph
 [
@@ -8,7 +8,7 @@ graph
     id 0
     name "line_1"
     category "Social organization"
-    cluster 3
+    cluster 1
     shortname "Social Org. (V)"
   ]
   node
@@ -16,7 +16,7 @@ graph
     id 1
     name "line_10"
     category "Social organization"
-    cluster 2
+    cluster 3
     shortname "Text Reptition"
   ]
   node
@@ -24,7 +24,7 @@ graph
     id 2
     name "line_11"
     category "Metrical pattern"
-    cluster 3
+    cluster 1
     shortname "Overall Rhythm (V)"
   ]
   node
@@ -32,7 +32,7 @@ graph
     id 3
     name "line_12"
     category "Rhythmic relationship"
-    cluster 3
+    cluster 1
     shortname "Rhythm (V)"
   ]
   node
@@ -40,7 +40,7 @@ graph
     id 4
     name "line_13"
     category "Metrical pattern"
-    cluster 4
+    cluster 2
     shortname "Rhythm (O)"
   ]
   node
@@ -48,7 +48,7 @@ graph
     id 5
     name "line_14"
     category "Rhythmic relationship"
-    cluster 4
+    cluster 2
     shortname "Overall Rhythm (O)"
   ]
   node
@@ -56,7 +56,7 @@ graph
     id 6
     name "line_16"
     category "Melodic form"
-    cluster 1
+    cluster 3
     shortname "Melodic form"
   ]
   node
@@ -64,7 +64,7 @@ graph
     id 7
     name "line_17"
     category "Metrical pattern"
-    cluster 1
+    cluster 3
     shortname "Phrase length"
   ]
   node
@@ -72,7 +72,7 @@ graph
     id 8
     name "line_18"
     category "Melodic form"
-    cluster 1
+    cluster 3
     shortname "Number of phrases"
   ]
   node
@@ -80,7 +80,7 @@ graph
     id 9
     name "line_19"
     category "Articulation"
-    cluster 3
+    cluster 1
     shortname "Position of final tone"
   ]
   node
@@ -88,7 +88,7 @@ graph
     id 10
     name "line_2"
     category "Orchestra"
-    cluster 4
+    cluster 2
     shortname "Orches. To Vocals"
   ]
   node
@@ -96,7 +96,7 @@ graph
     id 11
     name "line_20"
     category "Musical characterstics"
-    cluster 3
+    cluster 1
     shortname "Melodic range"
   ]
   node
@@ -104,7 +104,7 @@ graph
     id 12
     name "line_21"
     category "Articulation"
-    cluster 1
+    cluster 3
     shortname "Interval size"
   ]
   node
@@ -112,7 +112,7 @@ graph
     id 13
     name "line_22"
     category "Musical characterstics"
-    cluster 3
+    cluster 1
     shortname "Polyphonic type"
   ]
   node
@@ -120,7 +120,7 @@ graph
     id 14
     name "line_23"
     category "Ornament"
-    cluster 1
+    cluster 3
     shortname "Embellishment"
   ]
   node
@@ -128,7 +128,7 @@ graph
     id 15
     name "line_24"
     category "Dynamics"
-    cluster 1
+    cluster 3
     shortname "Tempo"
   ]
   node
@@ -136,7 +136,7 @@ graph
     id 16
     name "line_25"
     category "Dynamics"
-    cluster 4
+    cluster 2
     shortname "Volume"
   ]
   node
@@ -144,7 +144,7 @@ graph
     id 17
     name "line_26"
     category "Metrical pattern"
-    cluster 1
+    cluster 3
     shortname "Rubato: vocal"
   ]
   node
@@ -152,7 +152,7 @@ graph
     id 18
     name "line_27"
     category "Metrical pattern"
-    cluster 1
+    cluster 3
     shortname "Rubato: orchestra"
   ]
   node
@@ -160,7 +160,7 @@ graph
     id 19
     name "line_28"
     category "Ornament"
-    cluster 1
+    cluster 3
     shortname "Glissando"
   ]
   node
@@ -168,7 +168,7 @@ graph
     id 20
     name "line_29"
     category "Ornament"
-    cluster 1
+    cluster 3
     shortname "Melisma"
   ]
   node
@@ -176,7 +176,7 @@ graph
     id 21
     name "line_3"
     category "Orchestra"
-    cluster 4
+    cluster 2
     shortname "Social Org. (O)"
   ]
   node
@@ -184,7 +184,7 @@ graph
     id 22
     name "line_30"
     category "Ornament"
-    cluster 2
+    cluster 3
     shortname "Tremolo"
   ]
   node
@@ -192,7 +192,7 @@ graph
     id 23
     name "line_31"
     category "Ornament"
-    cluster 1
+    cluster 3
     shortname "Glottal"
   ]
   node
@@ -200,7 +200,7 @@ graph
     id 24
     name "line_33"
     category "Vocal noise"
-    cluster 3
+    cluster 1
     shortname "Vocal width"
   ]
   node
@@ -208,7 +208,7 @@ graph
     id 25
     name "line_34"
     category "Vocal noise"
-    cluster 3
+    cluster 1
     shortname "Nasality"
   ]
   node
@@ -216,7 +216,7 @@ graph
     id 26
     name "line_35"
     category "Vocal noise"
-    cluster 3
+    cluster 1
     shortname "Rasp"
   ]
   node
@@ -224,7 +224,7 @@ graph
     id 27
     name "line_36"
     category "Dynamics"
-    cluster 3
+    cluster 1
     shortname "Accent"
   ]
   node
@@ -232,7 +232,7 @@ graph
     id 28
     name "line_4"
     category "Musical organization"
-    cluster 3
+    cluster 1
     shortname "Musical Org. (V)"
   ]
   node
@@ -240,7 +240,7 @@ graph
     id 29
     name "line_5"
     category "Musical organization"
-    cluster 3
+    cluster 1
     shortname "Tonal Blend (V)"
   ]
   node
@@ -248,7 +248,7 @@ graph
     id 30
     name "line_6"
     category "Musical organization"
-    cluster 3
+    cluster 1
     shortname "Rhythm Coord (V)"
   ]
   node
@@ -256,7 +256,7 @@ graph
     id 31
     name "line_7"
     category "Musical organization"
-    cluster 4
+    cluster 2
     shortname "Musical Org. (O)"
   ]
   node
@@ -264,7 +264,7 @@ graph
     id 32
     name "line_8"
     category "Musical organization"
-    cluster 4
+    cluster 2
     shortname "Tonal Blend (O)"
   ]
   node
@@ -272,7 +272,7 @@ graph
     id 33
     name "line_9"
     category "Orchestra"
-    cluster 4
+    cluster 2
     shortname "Rhythm Coord (O)"
   ]
   edge
