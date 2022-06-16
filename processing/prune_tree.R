@@ -1,9 +1,11 @@
 ### organise jager tree
-library(ape)
-library(stringr)
-library(assertthat)
-library(dplyr)
-
+suppressPackageStartupMessages({
+  library(ape)
+  library(stringr)
+  library(assertthat)
+  library(dplyr)
+})
+  
 cantometric_societies = read.csv('processed_data/cleaned_cantometrics.csv') %>% 
   distinct(GlottoID, .keep_all = TRUE)
 tree = read.tree("data/world.tre")

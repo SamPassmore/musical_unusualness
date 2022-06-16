@@ -4,10 +4,10 @@ suppressPackageStartupMessages({
   library(dplyr)
 })
 
-source('helper.R')
+source('functions/helper.R')
 
 cantometrics = read.csv("processed_data/cantometrics_wunusualness.csv")
-cantometric_codes = read.csv("raw/gjb/etc/codes.csv")
+cantometric_codes = read.csv("raw/gjb/etc/codes.csv", fileEncoding="UTF-8-BOM")
 
 # Line indexes
 line_idx = str_detect(colnames(cantometrics), "line_")

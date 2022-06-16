@@ -1,13 +1,16 @@
 ### Total variance vs observed variance
-library(stringr)
-library(dplyr)
-library(scales)
-library(corrr)
+suppressPackageStartupMessages({
+  library(stringr)
+  library(dplyr)
+  library(scales)
+  library(corrr)
+})
+
 # make summarise quiet
 options(dplyr.summarise.inform = FALSE)
 
 ## How many possible codings are there in Cantometrics? 
-cantometric_codes = read.csv('raw/gjb/etc/codes.csv')
+cantometric_codes = read.csv('raw/gjb/etc/codes.csv', fileEncoding="UTF-8-BOM")
 vars = unique(cantometric_codes$var_id)
 
 possible_codings = prod(table(cantometric_codes$var_id))
@@ -45,6 +48,7 @@ fake_song = function(codes){
 
 iter = 100
 fake_proportions = c()
+fake_correlations = list()
 for(i in 1:iter){
   # Create n fake songs
   fake_songs = t(
@@ -61,33 +65,11 @@ for(i in 1:iter){
     nrow()
   
   fake_proportions[i] = n_fakecodings / n_songs
+  
+  fake_correlations[[i]] = correlate(fake_songs, method = "pearson", use = "pairwise.complete.obs")
 }
 
 cat("FAKE SONGS: There are", n_fakecodings, "unique codings from", 
     nrow(cantometrics), " fake songs")
 
-
-#### Variable Structure
-## All variables Network
-min_cor = 0.3
- 
-cantometric_lines %>% correlate() %>% 
-  network_plot(min_cor = min_cor, repel = TRUE, curved = FALSE)
-
-## Indo-European societies Network
-cantometrics %>% 
-  filter(FamilyLevGlottocode == "indo1319") %>% 
-  dplyr::select(paste0("line_", 1:37)) %>% 
-  correlate() %>% 
-  network_plot(min_cor = min_cor, repel = TRUE, curved = FALSE)
-
-cantometrics %>% 
-  filter(FamilyLevGlottocode == "aust1307") %>% 
-  dplyr::select(paste0("line_", 1:37)) %>% 
-  correlate() %>% 
-  network_plot(min_cor = min_cor, repel = TRUE, curved = FALSE)
-
-
-fake_songs %>% correlate() %>% 
-  network_plot(min_cor = min_cor)
 

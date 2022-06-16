@@ -1,7 +1,10 @@
 calculate_unusualness = function(data, group_var, variable_set, 
                                  min_group = 10, impute = FALSE){
-  require(dplyr)
-  require(tibble)
+  suppressPackageStartupMessages({
+    require(dplyr)
+    require(tibble)  
+  })
+  
   if(missing(group_var)){
     ## Code to make the function evaluate all data without groups
   } else {

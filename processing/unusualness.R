@@ -1,8 +1,10 @@
 # Unusualness
-library(stringr)
-library(purrr)
-library(dplyr)
-library(ape)
+suppressPackageStartupMessages({
+  library(stringr)
+  library(purrr)
+  library(dplyr)
+  library(ape)
+})
 
 cantometrics = read.csv('processed_data/cleaned_cantometrics.csv')
 
@@ -36,8 +38,10 @@ regions = unique(cantometrics$Region)
 
 regional_unusualness = rep(NA, nrow(cantometrics))
 names(regional_unusualness) = cantometrics$song_id
+
+cat("Calculate Unusualness by Region...\n")
+
 for(i in seq_along(regions)){
-  print(paste0("Analyzing ", regions[i], "..."))
   
   region_cantometrics = cantometrics %>% 
     dplyr::filter(Region == regions[i])
@@ -73,8 +77,10 @@ language_families = language_families[!is.na(language_families)]
 
 languagefamily_unusualness = rep(NA, nrow(cantometrics))
 names(languagefamily_unusualness) = cantometrics$song_id
+
+cat("Calculate Unusualness by Language family...\n")
+
 for(i in seq_along(language_families)){
-  print(paste0("Analyzing ", language_families[i], "..."))
   
   lf_cantometrics = cantometrics %>% 
     dplyr::filter(FamilyLevGlottocode == language_families[i])
