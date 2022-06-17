@@ -23,7 +23,7 @@ models:
 	mkdir -p results/models
 	mkdir -p results/networks
 	RScript analysis/fake_cantometrics.R
-	RScript model_unusualness.R 
+	RScript analysis/model_unusualness.R 
 	RScript figure_code/networks.R
 
 plots:

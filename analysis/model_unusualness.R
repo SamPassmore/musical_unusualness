@@ -22,6 +22,7 @@ cantometrics$nearest_phyloneighbour_std =
   std_variables(cantometrics$nearest_phyloneighbour)
 cantometrics$n_neighbours_std = 
   std_variables(cantometrics$n_neighbours)
+cantometrics$n_glottoneighbours_std = std_variables(cantometrics$n_glottoneighbours)
 cantometrics$u_ea_std = std_variables(cantometrics$u_ea)
 cantometrics$u_kinship_std = std_variables(cantometrics$u_kinship)
 cantometrics$u_economy_std = std_variables(cantometrics$u_economy)
@@ -88,6 +89,16 @@ fit.2.4 = brm(
   file = paste0(results_dir, "numberof_neighbours.rds")
 )
 fit.2.4 <- add_criterion(fit.2.4, "loo")
+
+fit.2.4.1 = brm(
+  unusualness_region_std ~ n_glottoneighbours_std + (1|society_id),
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup,
+  file = paste0(results_dir, "numberof_glottoneighbours.rds")
+)
+fit.2.4.1 <- add_criterion(fit.2.4, "loo")
 
 fit.2.5 = brm(
   unusualness_region_std ~ abs(latitude_std) + (1|society_id),
