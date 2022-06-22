@@ -70,8 +70,7 @@ cantometrics = cantometrics[complete_data,]
 x = assert_that(all(table(cantometrics$song_id) == 1))
 
 cat("CANTOMETRICS SAMPLE:
-There are ", nrow(cantometrics), " songs and ", length(unique(cantometrics$society_id)), " societies
-    ")
+There are ", nrow(cantometrics), " songs and ", length(unique(cantometrics$society_id)), " societies\n")
 
 write.csv(cantometrics, 
           'processed_data/cleaned_cantometrics.csv', 

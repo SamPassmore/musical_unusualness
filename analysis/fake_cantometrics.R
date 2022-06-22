@@ -15,7 +15,7 @@ vars = unique(cantometric_codes$var_id)
 
 possible_codings = prod(table(cantometric_codes$var_id))
 
-cat("There are ", signif(possible_codings, 2), " possible codings in Cantometrics.")
+cat("There are ", format(possible_codings, scientific = FALSE, big.mark=","), " possible codings in Cantometrics.\n")
 
 ## Observed codings
 cantometrics = read.csv("processed_data/cantometrics_wunusualness.csv")
@@ -32,11 +32,11 @@ n_codings =
   nrow()
 
 cat("There are", n_codings, "unique codings from", 
-    n_songs, "songs")
+    n_songs, "songs\n")
 
-cat("The original data set is ", round(n_codings / n_songs, 3) * 100, "% unique")
+cat("The original data set is ", round(n_codings / n_songs, 3) * 100, "% unique.\n")
 
-cat("There are ", n_songs - n_codings, "non-unique codings")
+cat("There are ", n_songs - n_codings, "non-unique codings.\n")
 
 ## Randomised diversity
 fake_song = function(codes){
@@ -66,10 +66,26 @@ for(i in 1:iter){
   
   fake_proportions[i] = n_fakecodings / n_songs
   
-  fake_correlations[[i]] = correlate(fake_songs, method = "pearson", use = "pairwise.complete.obs")
+  fake_correlations[[i]] = correlate(fake_songs, 
+                                     method = "pearson",
+                                     use = "pairwise.complete.obs", 
+                                     quiet = TRUE)
 }
 
 cat("FAKE SONGS: There are", n_fakecodings, "unique codings from", 
-    nrow(cantometrics), " fake songs")
+    nrow(cantometrics), " fake songs.\n")
+cat("Across all iterations, the simulated cantometrics set contains",
+    paste0(formatC(100 * mean(fake_proportions), format = "f", digits = 1), "%"),
+    "unique fake songs")
 
+# summarise correlations
+summary_fakecorrelations = sapply(fake_correlations, function(f){
+  f = data.matrix(f)
+  f = f[,2:ncol(f)]
+  mean(f[lower.tri(f)], na.rm = TRUE)
+})
 
+average_fakecorrelation = mean(summary_fakecorrelations)
+
+cat("Across ", iter, "iterations, simulated Cantometrics variables had an average pearson correlation of",
+    format(average_fakecorrelation, scientific = FALSE, big.mark=",", digits = 2))
