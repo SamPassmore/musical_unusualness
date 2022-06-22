@@ -6,7 +6,7 @@ suppressPackageStartupMessages({
   library(missForest)
 })
 
-source("unusualness_function.R")
+source("functions/unusualness_function.R")
 
 ea_variables = read.csv('data/ea_variables.csv')
 
@@ -26,8 +26,11 @@ dplace_wide = left_join(dplace_wide, dplace_societies,
 # Match with cantometrics societies
 cantometrics_societies = 
   read.csv('raw/gjb/raw/societies.csv')
-cantometrics_songs = read.csv('processed_data/cantometrics_modeldata.csv') %>% 
-  select(society_id, n_songs) %>% 
+
+# get song counts by society
+cantometrics_songs = read.csv('raw/gjb/cldf/songs.csv') %>% 
+  group_by(society_id) %>% 
+  summarise(n_songs = n()) %>% 
   distinct(.keep_all = TRUE)
 
 # Check why metadata isn't the same across these two DB
@@ -84,7 +87,7 @@ dplace_subset[,remaning_eavars] = dplace_imputed$ximp
 rownames(dplace_subset) = dplace_subset$xd_id
 cat(nrow(dplace_subset), 
     "societies matched with DPLACE with",
-    sum(dplace_subset$n_songs), "songs")
+    sum(dplace_subset$n_songs), "songs\n\n")
 
 
 ### Societal unusualness
@@ -99,7 +102,7 @@ unusualness_allvars =
                           )
 
 kinship_vars = ea_variables$id[ea_variables$kinship == 1]
-sum(kinship_vars %in% colnames(dplace_subset))
+cat("There are", sum(kinship_vars %in% colnames(dplace_subset)), "kinship variables\n")
 unusualness_kinship = calculate_unusualness(data = dplace_subset,
                        group_var = "Region",
                        variable_set = kinship_vars,
@@ -107,14 +110,14 @@ unusualness_kinship = calculate_unusualness(data = dplace_subset,
 
 
 economy_vars = ea_variables$id[ea_variables$economy == 1]
-sum(economy_vars %in% colnames(dplace_subset))
+cat("There are", sum(economy_vars %in% colnames(dplace_subset)), "economic variables\n")
 unusualness_economy = calculate_unusualness(data = dplace_subset,
                                             group_var = "Region",
                                             variable_set = economy_vars,
                                             min_group = 5)
 
 housing_vars = ea_variables$id[ea_variables$housing == 1]
-sum(housing_vars %in% colnames(dplace_subset))
+cat("There are",sum(housing_vars %in% colnames(dplace_subset)), "housing variables\n")
 unusualness_housing = calculate_unusualness(data = dplace_subset,
                                             group_var = "Region",
                                             variable_set = housing_vars,

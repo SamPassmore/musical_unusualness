@@ -59,20 +59,44 @@ nearest_neighbour =
 cantometrics = left_join(cantometrics, nearest_neighbour,
                          by = "society_id")  
 
+# Calculate all languages within min dist radius 
+glottolog = read.csv("https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv")
+glottolog_value = read.csv("https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/values.csv") 
+glottolog_value = glottolog_value %>% 
+  dplyr::filter(Code_ID == "level-language")
+
+glottolog = glottolog %>% 
+  filter(ID %in% glottolog_value$Language_ID) %>% 
+  distinct(ID, .keep_all = TRUE)
+
+glottolog_geographicdistance = 
+  distm(x = glottolog[,c("Longitude",
+                                      "Latitude")]) / 1000
+diag(glottolog_geographicdistance) = NA
+
 ## For each society, count the number of societies 
 ## within x kilometers 
 min_dist = 250
-n_neighbours = nearest_neighbour =
+n_cantoneighbour = apply(cantometrics_geographicdistance, 2,
+                               function(x) sum(x < min_dist, na.rm = TRUE)
+)
+
+n_glottologneighbour = apply(glottolog_geographicdistance, 2,
+                             function(x) sum(x < min_dist, na.rm = TRUE))
+glottolog$n_glottoneighbours = n_glottologneighbour
+
+n_neighbours =
   data.frame(
     society_id = cantometrics_societies$society_id,
-    n_neighbours = 
-      apply(cantometrics_geographicdistance, 2,
-            function(x) sum(x < min_dist, na.rm = TRUE)
-            )
-  )
+    glottocode = cantometrics_societies$GlottoID,
+    n_neighbours = n_cantoneighbour
+    )
 
 cantometrics = left_join(cantometrics, n_neighbours,
                          by = "society_id") 
+
+cantometrics = left_join(cantometrics, glottolog,
+                         by  =c("GlottoID" = "Glottocode"))
 
 #### Get nearest phylogenetic neighbour ####
 tree = read.tree('processed_data/pruned_tree.tre')
@@ -108,15 +132,12 @@ cantometrics = cantometrics %>%
                 society_mean, 
                 society_region_diff,
                 nn_distance_km, nearest_phyloneighbour,
-                n_neighbours,
+                n_neighbours, n_glottoneighbours, 
                 u_ea, u_kinship, u_economy, u_housing,
-                FamilyLevGlottocode, 
+                GlottoID, FamilyLevGlottocode, 
                 Region,
                 Society_latitude)
 
-# cantometrics = cantometrics[complete.cases(cantometrics),]
-
-# x = assertthat::assert_that(sum(is.na(cantometrics)) == 0)
 
 write.csv(cantometrics, 
           file = "processed_data/cantometrics_modeldata.csv",
