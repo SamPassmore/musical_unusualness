@@ -157,7 +157,6 @@ seasia_network = make_network(seasia_lines)
 write_graph(simplify(seasia_network$adj_network),  
             "seasia_network.gml", format = "gml")
 
-
 #### Society Networks ####
 ### Networks of the largest societies 
 # cantometrics %>%
@@ -236,6 +235,18 @@ ARI_comparisons =
         })
 
 output = data.frame(all_pairs, ARI = round(ARI_comparisons, 2))
+types = data.frame(name = names(all_networks),
+                   type = c("Global", "Region", "Region", "Region",
+                            "Region", "Society", "Society", "Society", 
+                            "Society"))
+output = left_join(output, types, by = c("X1" = "name")) %>% 
+  left_join(., types, by = c("X2" = "name"))
+
+output$match = ifelse(output$type.x == output$type.y, output$type.x,
+                      "different")
+
+ggplot(output, aes(x = ARI, y = match)) + 
+  geom_boxplot()
 
 ggsave(all_networks$global$plot_network + ggtitle("Global"),
        file = 'figures/global_relationships.jpg')
