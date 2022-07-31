@@ -3,6 +3,7 @@ library(stringr)
 library(ggplot2)
 library(dplyr)
 library(paletteer)
+library(purrr)
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 line_idx = str_detect(colnames(cantometrics), "line_")
@@ -40,7 +41,15 @@ song_details = function(cantometrics, id){
   sd
 }
 
-song_details = subset(cantometrics, song_id %in% c(30076, 30077))
+# songs = c(30076, 30077)
+# song_details = subset(cantometrics, song_id %in% songs)
+
+society_ofinterest = c(20571)
+song_details = cantometrics %>% 
+  dplyr::filter(society_id %in% society_ofinterest)
+
+song_names = song_details$song_id
+
 song_title = paste0(song_details$Song, " by ",
                     song_details$society)
 song_details = song_details[,
@@ -74,6 +83,10 @@ for(i in 1:nrow(song_details)){
                          frequency = freq_list[[i]], 
                          var_id = line_ids)
 }
+
+names(line_list) = song_names
+line_list = map_df(line_list, ~as.data.frame(.x), .id="id")
+
 line_df <- data.frame(state = unlist(song_details), 
                       frequency = freq, 
                       var_id = names(song_details))
@@ -100,13 +113,12 @@ df$var_id = factor(df$var_id,
 names(freq) = str_replace(names(freq), "_", " ") %>%
   str_to_title(.)
 
+
+
 p = ggplot(df, aes(fill=state, y=frequency, x=var_id)) + 
   geom_col(position="fill", color = "white") +
-  geom_line(data = line_list[[1]], aes(group = 1), col = "blue", lwd = 1.) +
-  geom_point(data = line_list[[1]], aes(group = 1), col = "blue") + 
-  geom_line(data = line_list[[2]], aes(group = 1), col = "red", lwd = 1.) +
-  geom_point(data = line_list[[2]], aes(group = 1), col = "red") + 
-  ggtitle("Panpipe Ensemble by Kursk (Blue) vs A'Wach Ritual by Moroccan Berbers (Red)") +
+  geom_line(data = line_list, aes(group = id, col = id), lwd = 1.) +
+  geom_point(data = line_list, aes(group = id, col = id)) + 
   ylab("Proportion of Categories") +
   xlab(element_blank()) + 
   theme_minimal() + 

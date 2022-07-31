@@ -47,6 +47,15 @@ fit.1 = brm(
 )
 fit.1 <- add_criterion(fit.1, "loo")
 
+# Full model
+fit.full = brm(
+  unusualness_region_std ~ n_neighbours_std + u_kinship_std + u_economy_std + u_housing_std + (1|society_id),
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup)
+fit.full <- add_criterion(fit.full, "loo")
+
 # BiVariate models
 fit.2.1 = brm(
   unusualness_region_std ~ society_region_diff +

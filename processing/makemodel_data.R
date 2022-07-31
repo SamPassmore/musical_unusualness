@@ -77,9 +77,21 @@ diag(glottolog_geographicdistance) = NA
 ## For each society, count the number of societies 
 ## within x kilometers 
 min_dist = 250
-n_cantoneighbour = apply(cantometrics_geographicdistance, 2,
+n_cantoneighbour_250 = apply(cantometrics_geographicdistance, 2,
                                function(x) sum(x < min_dist, na.rm = TRUE)
 )
+
+min_dist = 500
+n_cantoneighbour_500 = apply(cantometrics_geographicdistance, 2,
+                             function(x) sum(x < min_dist, na.rm = TRUE)
+)
+
+min_dist = 1000
+n_cantoneighbour_1000 = apply(cantometrics_geographicdistance, 2,
+                             function(x) sum(x < min_dist, na.rm = TRUE)
+)
+
+
 
 n_glottologneighbour = apply(glottolog_geographicdistance, 2,
                              function(x) sum(x < min_dist, na.rm = TRUE))
@@ -89,7 +101,9 @@ n_neighbours =
   data.frame(
     society_id = cantometrics_societies$society_id,
     glottocode = cantometrics_societies$GlottoID,
-    n_neighbours = n_cantoneighbour
+    n_neighbours_250 = n_cantoneighbour_250,
+    n_neighbours_500 = n_cantoneighbour_500,
+    n_neighbours_1000 = n_cantoneighbour_1000
     )
 
 cantometrics = left_join(cantometrics, n_neighbours,
