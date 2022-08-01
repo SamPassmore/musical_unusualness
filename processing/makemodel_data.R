@@ -88,9 +88,6 @@ n_neighbours =
 cantometrics = left_join(cantometrics, n_neighbours,
                          by = "society_id") 
 
-cantometrics = left_join(cantometrics, glottolog,
-                         by  =c("GlottoID" = "Glottocode"))
-
 #### Get nearest phylogenetic neighbour ####
 tree = read.tree('processed_data/pruned_tree.tre')
 
@@ -115,17 +112,20 @@ cantometrics = left_join(cantometrics,
                          dplace_u,
                          by = "society_id")
 
+# calculate leave-one-out group means
+cantometrics = cantometrics %>% 
+  group_by(society_id) %>%
+  mutate(society_loo_mean = (sum(unusualness_region) - unusualness_region)/(n()-1))
+
 ## Keep only complete cases
 cantometrics = cantometrics %>% 
   dplyr::select(song_id, society_id,
-                unusualness_wholesample, 
                 unusualness_region,
-                unusualness_languagefamily,
                 regional_mean,
                 society_mean, 
                 society_region_diff,
                 nn_distance_km, nearest_phyloneighbour,
-                n_neighbours, n_glottoneighbours, 
+                n_neighbours_250, n_neighbours_500, n_neighbours_1000,
                 u_ea, u_kinship, u_economy, u_housing,
                 GlottoID, FamilyLevGlottocode, 
                 Region,
