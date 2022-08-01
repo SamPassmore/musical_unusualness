@@ -59,21 +59,6 @@ nearest_neighbour =
 cantometrics = left_join(cantometrics, nearest_neighbour,
                          by = "society_id")  
 
-# Calculate all languages within min dist radius 
-glottolog = read.csv("https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/languages.csv")
-glottolog_value = read.csv("https://raw.githubusercontent.com/glottolog/glottolog-cldf/master/cldf/values.csv") 
-glottolog_value = glottolog_value %>% 
-  dplyr::filter(Code_ID == "level-language")
-
-glottolog = glottolog %>% 
-  filter(ID %in% glottolog_value$Language_ID) %>% 
-  distinct(ID, .keep_all = TRUE)
-
-glottolog_geographicdistance = 
-  distm(x = glottolog[,c("Longitude",
-                                      "Latitude")]) / 1000
-diag(glottolog_geographicdistance) = NA
-
 ## For each society, count the number of societies 
 ## within x kilometers 
 min_dist = 250
@@ -90,12 +75,6 @@ min_dist = 1000
 n_cantoneighbour_1000 = apply(cantometrics_geographicdistance, 2,
                              function(x) sum(x < min_dist, na.rm = TRUE)
 )
-
-
-
-n_glottologneighbour = apply(glottolog_geographicdistance, 2,
-                             function(x) sum(x < min_dist, na.rm = TRUE))
-glottolog$n_glottoneighbours = n_glottologneighbour
 
 n_neighbours =
   data.frame(
