@@ -44,6 +44,7 @@ fake_song = function(codes){
          codes$var_id,
          function(x)
            sample(x, 1))
+  ## Add dependencies 
 }
 
 iter = 100

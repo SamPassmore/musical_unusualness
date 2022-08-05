@@ -129,7 +129,8 @@ cantometrics = cantometrics %>%
                 u_ea, u_kinship, u_economy, u_housing,
                 GlottoID, FamilyLevGlottocode, 
                 Region,
-                Society_latitude)
+                Society_latitude,
+                society_loo_mean)
 
 
 write.csv(cantometrics, 

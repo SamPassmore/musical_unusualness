@@ -115,7 +115,7 @@ names(freq) = str_replace(names(freq), "_", " ") %>%
 
 
 
-p = ggplot(df, aes(fill=state, y=frequency, x=var_id)) + 
+p = ggplot(df, aes(y=frequency, x=var_id)) + 
   geom_col(position="fill", color = "white") +
   geom_line(data = line_list, aes(group = id, col = id), lwd = 1.) +
   geom_point(data = line_list, aes(group = id, col = id)) + 
@@ -127,7 +127,8 @@ p = ggplot(df, aes(fill=state, y=frequency, x=var_id)) +
         axis.text.x = element_text(angle = 90)) + 
   guides(fill=guide_legend(nrow = 2,
                            byrow = TRUE,
-                           override.aes = list(shape = NA)))
+                           override.aes = list(shape = NA)),
+         col = "none")
 
 ggsave(plot = p, 
        filename = paste0(

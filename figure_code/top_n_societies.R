@@ -1,18 +1,10 @@
-library(dplyr)
-library(ggplot2)
-library(ggridges)
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(ggplot2)
+  library(ggridges)
+  })
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
-
-cantometrics %>% 
-  dplyr::select(society_id, song_id, unusualness_region) %>% 
-  arrange(unusualness_region) %>% 
-  head()
-
-cantometrics %>% 
-  dplyr::select(society_id, song_id, unusualness_region) %>% 
-  dplyr::filter(society_id == 24597)
-
 
 top_bottom_n = 10
 min_songs = 5
