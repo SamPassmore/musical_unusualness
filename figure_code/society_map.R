@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(ggrepel)
 library(patchwork)
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
@@ -61,6 +62,25 @@ map_r = basemap +
   scale_color_viridis_c(option = "magma") + 
   theme(legend.position = "none")
 
+
+## Add labels of the most unusual societies
+society_metadata = read.csv('raw/gjb/cldf/societies.csv')
+
+cantometrics_societies = left_join(cantometrics_societies, society_metadata,
+                                   by = "society_id")
+
+most_unusual = cantometrics_societies %>% 
+  dplyr::filter(society_id %in% c(24597, 20571, 62582, 21737))
+
+map_r = map_r + 
+  geom_text_repel(data = most_unusual, 
+                  aes(x = Society_longitude.x,
+                      y = Society_latitude.x,
+                      label = society),
+                  size = 4,
+                  box.padding = 0.7,
+                  max.overlaps = Inf,
+                  point.padding = 0.1)
 
 #### Histogram
 limit <- quantile(cantometrics[[mapping_variable]], 
