@@ -4,14 +4,16 @@ library(patchwork)
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 
+mapping_variable = "unusualness_region"
+
 # Get average society score and song counts
 cantometrics_societies = cantometrics %>% 
   add_count(society_id, name = "song_count") %>% 
   group_by(society_id) %>% 
   summarise(
-    society_unusualness_ws = median(unusualness_wholesample),
-    society_unusualness_lf = median(unusualness_languagefamily),
-    society_unusualness_r = median(unusualness_region),
+    unusualness_wholesample = median(unusualness_wholesample),
+    unusualness_languagefamily = median(unusualness_languagefamily),
+    unusualness_region = median(unusualness_region),
     song_count = mean(song_count),
     Society_latitude = mean(Society_latitude),
     Society_longitude = ifelse(Society_longitude <= -25, 
@@ -54,23 +56,14 @@ map_r = basemap +
              aes(x = Society_longitude,
                  y = Society_latitude,
                  size = song_count,
-                 col = society_unusualness_r),
+                 col = .data[[mapping_variable]]),
              alpha = 0.6) +
   scale_color_viridis_c(option = "magma") + 
   theme(legend.position = "none")
 
-map_lf = basemap + 
-  geom_point(data = cantometrics_societies,
-             aes(x = Society_longitude,
-                 y = Society_latitude,
-                 size = song_count,
-                 col = society_unusualness_lf),
-             alpha = 0.6) +
-  scale_color_viridis_c(option = "magma") + 
-  theme(legend.position = "none")
 
 #### Histogram
-limit <- quantile(cantometrics$unusualness_region, 
+limit <- quantile(cantometrics[[mapping_variable]], 
                   0.02, 
                   na.rm = T)  # top 2 %
 
@@ -97,12 +90,6 @@ histogram_plot = ggplot(cantometrics,
            x = limit,
            xend = limit,
            y = 0, yend = 400, size = 0.5, linetype = "dashed") +
-  annotate("segment",
-           col="black",
-           alpha = 0.6,
-           x = lomax_isolates$unusualness_region,
-           xend = lomax_isolates$unusualness_region,
-           y = 0, yend = 400, size = 1, linetype = "dotted") + 
   scale_fill_viridis_c('Score', option="A", direction=-1) +
   xlab("Unusualness Score") + ylab("Number of Songs") +
   guides(fill="none") +
@@ -127,14 +114,3 @@ ggsave("figures/worldmap_region.png",
        height = 5, 
        width = 8)
 
-mf <- map_lf + 
-  inset_element(histogram_plot, 
-                right = 0.5, 
-                bottom = 0.0, 
-                left = 0.2, 
-                top = 0.3)
-
-ggsave("figures/worldmap_languagefamily.png", 
-       mf, 
-       height = 5, 
-       width = 8)

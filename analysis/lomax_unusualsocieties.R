@@ -10,20 +10,40 @@ library(ggplot2)
 # Pentacost (12816) - Not 100% sure that this is the right society
 
 lomax_ids = c(27413, 62311, 21869, 12816)
+min_songs = 5
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
+
+sum(lomax_ids %in% cantometrics$society_id)
+
+cantometrics_societies = cantometrics %>%
+  group_by(society) %>% 
+  summarise(
+    society_id = first(society_id),
+    n_songs = n(),
+    median_unusualness = mean(unusualness_region))
+
+## add a percentile
+cantometrics_societies = cantometrics_societies[order(cantometrics_societies$median_unusualness),]
+n = nrow(cantometrics_societies)
+cantometrics_societies$percentile = (1:n - 1)/(n - 1)
+
+cantometrics_societies %>% 
+  filter(society_id %in% lomax_ids)
 
 lomax_isolates = cantometrics %>% 
   filter(society_id %in% lomax_ids) %>% 
   select(song_id, society_id, 
          unusualness_wholesample,
          unusualness_region,
-         unusualness_languagefamily) %>% 
+         unusualness_languagefamily,
+         percentile) %>% 
   group_by(society_id) %>% 
   summarise(unusualness_wholesample = mean(unusualness_wholesample),
           unusualness_region = mean(unusualness_region),
-          unusualness_languagefamily = mean(unusualness_languagefamily
-                                            ))
+          unusualness_languagefamily = mean(unusualness_languagefamily),
+          percentile = mean(percentile)
+          )
 
 
 ggplot(lomax_isolates, 

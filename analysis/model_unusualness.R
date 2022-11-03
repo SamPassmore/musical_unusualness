@@ -111,6 +111,7 @@ fit.2.4.1 = brm(
 )
 fit.2.4.1 <- add_criterion(fit.2.4.1, "loo")
 
+
 fit.2.4.2 = brm(
   unusualness_region ~ n_neighbours1000_std + (1|society_id),
   data = cantometrics,
@@ -176,3 +177,26 @@ fit.society_loo = brm(
   file = paste0(results_dir, "society_loo.rds")
 )
 fit.society_loo <- add_criterion(fit.society_loo, "loo")
+
+# full + society
+fit.full = brm(
+  unusualness_region ~ 
+    n_neighbours500_std + 
+    nearest_phyloneighbour_std + 
+    u_kinship_std + 
+    u_economy_std + 
+    u_housing_std + 
+    society_loo_mean_std,
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup,
+  file = paste0(results_dir, "full_andsociety_ri.rds"))
+fit.full <- add_criterion(fit.full, "loo")
+
+
+## R2 Values
+# full model
+library(performance)
+r2_bayes(fit.full)
+r2_bayes(fit.society_loo)

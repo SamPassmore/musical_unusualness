@@ -1,9 +1,11 @@
 ## Unusualness of features
-library(stringr)
-library(ggplot2)
-library(dplyr)
-library(paletteer)
-library(purrr)
+suppressPackageStartupMessages({
+  library(stringr)
+  library(ggplot2)
+  library(dplyr)
+  library(paletteer)
+  library(purrr)
+})
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 line_idx = str_detect(colnames(cantometrics), "line_")
@@ -11,7 +13,7 @@ line_idx = str_detect(colnames(cantometrics), "line_")
 cantometric_codes = read.csv('raw/gjb/etc/codes.csv')
 
 #### Calculate state probabilities ####
-regional_idx = cantometrics$Region == "Africa"
+regional_idx = cantometrics$Region == "Southeast Asia"
 state_probabilities = apply(
   cantometrics[,line_idx],
   2,
@@ -116,23 +118,89 @@ names(freq) = str_replace(names(freq), "_", " ") %>%
 
 
 p = ggplot(df, aes(y=frequency, x=var_id)) + 
-  geom_col(position="fill", color = "white") +
+  geom_col(position="fill", color = "black", fill = "white") +
   geom_line(data = line_list, aes(group = id, col = id), lwd = 1.) +
-  geom_point(data = line_list, aes(group = id, col = id)) + 
+  # geom_point(data = line_list, aes(group = id, col = id)) +
+  # song of interest
+  geom_line(data = line_list[line_list$id == 2453,], aes(group = id), lwd = 1., col = "red") +
   ylab("Proportion of Categories") +
   xlab(element_blank()) + 
   theme_minimal() + 
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.text.x = element_text(angle = 90)) + 
+  scale_color_manual(values = c("2453" = "grey", 
+                                "2447" = "grey",
+                                "2448" = "grey",
+                                "2449" = "grey",
+                                "2450" = "grey",
+                                "2451" = "grey",
+                                "2452" = "grey",
+                                "2454" = "grey",
+                                "2455" = "grey",
+                                "2456" = "grey",
+                                "419" = "grey")) + 
   guides(fill=guide_legend(nrow = 2,
                            byrow = TRUE,
                            override.aes = list(shape = NA)),
          col = "none")
 
+p
 ggsave(plot = p, 
        filename = paste0(
          "figures/state_probabilities_", 
          "two_songs", 
          ".jpg"
-         ))
+         ), 
+       bg="white")
+
+df = df %>% 
+  group_by(var_id) %>% 
+  mutate(n_states = n(),
+         thirteen_split = cut(1:n_states, 13, labels = FALSE))
+
+states = df %>% 
+  group_by(var_id) %>% 
+  distinct(frequency, thirteen_split)
+
+line_list = df %>% 
+  group_by(var_id) %>% 
+  mutate(n_states = n(),
+         thirteen_split = cut(1:n_states, 13, labels = FALSE))
+
+ggplot(df, aes(y = thirteen_split, x = var_id, size = frequency)) + 
+  geom_point() +
+  geom_line(data = line_list[line_list$id == 2453,], 
+            aes(y = as.numeric(state), group = id), lwd = 1.) +
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 90)) 
+
+p = ggplot(df, aes(y=1:13, x=var_id, size = frequency)) + 
+  geom_point(position="fill", color = "black", fill = "white") +
+  geom_line(data = line_list, aes(group = id, col = id), lwd = 1.) +
+  # geom_point(data = line_list, aes(group = id, col = id)) +
+  # song of interest
+  geom_line(data = line_list[line_list$id == 2453,], aes(group = id), lwd = 1., col = "red") +
+  ylab("Proportion of Categories") +
+  xlab(element_blank()) + 
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 90)) + 
+  scale_color_manual(values = c("2453" = "grey", 
+                                "2447" = "grey",
+                                "2448" = "grey",
+                                "2449" = "grey",
+                                "2450" = "grey",
+                                "2451" = "grey",
+                                "2452" = "grey",
+                                "2454" = "grey",
+                                "2455" = "grey",
+                                "2456" = "grey",
+                                "419" = "grey")) + 
+  guides(fill=guide_legend(nrow = 2,
+                           byrow = TRUE,
+                           override.aes = list(shape = NA)),
+         col = "none")

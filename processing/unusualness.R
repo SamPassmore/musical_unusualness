@@ -11,9 +11,9 @@ cantometrics = read.csv('processed_data/cleaned_cantometrics.csv')
 line_idx = str_detect(colnames(cantometrics), "line_")
 
 ## Subset to all societies with a taxa 
-pruned_tree = read.tree('processed_data/pruned_tree.tre')
-cantometrics = cantometrics %>% 
-  dplyr::filter(cantometrics$GlottoID %in% pruned_tree$tip.label)
+# pruned_tree = read.tree('processed_data/pruned_tree.tre')
+# cantometrics = cantometrics %>% 
+#   dplyr::filter(cantometrics$GlottoID %in% pruned_tree$tip.label)
 
 #### Calculate state probabilities ####
 state_probabilities = apply(
@@ -35,6 +35,8 @@ cantometrics$unusualness_wholesample = unusualness
 
 #### Calculate Unusualness Score by MacroArea ####
 regions = unique(cantometrics$Region)
+# remove NA regions
+regions = regions[!is.na(regions)]
 
 regional_unusualness = rep(NA, nrow(cantometrics))
 names(regional_unusualness) = cantometrics$song_id
