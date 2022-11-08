@@ -12,7 +12,7 @@ cantometrics_topbottom = cantometrics %>%
   group_by(society) %>% 
   summarise(
     n_songs = n(),
-    median_unusualness = mean(unusualness_region)) %>% 
+    median_unusualness = median(unusualness_region)) %>% 
   dplyr::filter(n_songs >= min_songs) %>% 
   arrange(median_unusualness) %>%
   slice(1:top_bottom_n, (n()-top_bottom_n):n(), with_ties = FALSE) %>% 
@@ -28,16 +28,26 @@ cantometrics_ss$topbottom = ifelse(cantometrics_ss$society %in% cantometrics_top
                                 "Most Unusual",
                                 "Least Unusual")
 
-ggplot(data = cantometrics_ss,
+# remove societies that don't match the metadata
+cantometrics_ss = cantometrics_ss[!is.na(cantometrics_ss$society),]
+
+p = ggplot(data = cantometrics_ss,
        aes(x = unusualness_region,
-           y = (society),
-           col = (society))) + 
+           y = society)) + 
   geom_point() + 
   geom_boxplot() + 
   scale_x_continuous(trans = 'reverse') + 
   ylab('') + 
   xlab('Unusualness') + 
-  theme_minimal() +
-  theme(legend.position = "none") 
+  theme_minimal(base_size = 24) +
+  theme(legend.position = "none") +
+  facet_wrap(~topbottom, drop = TRUE, scales = 'free_y',
+             nrow = 2) + 
+  scale_y_discrete(labels=c("Malay"=expression(bold("Malay")), 
+                            "Kel Aïr Tuareg" = expression(bold("Kel Aïr Tuareg")),
+                            "Moroccan Berbers" = expression(bold("Moroccan Berbers")),
+                            parse=TRUE))
+p
 
+ggsave(plot = p, file = "figures/top_n_unusual.png", height = 290, units = "mm")
        
