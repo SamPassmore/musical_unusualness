@@ -1,0 +1,38 @@
+short_title,var_id,modal_value,original_mode,text
+Social Org Vocal,Line 1,7,8,Alternation: Leader and group
+Social Org Voc/Orch,Line 2,4,3,A large orchestra with vocalist
+Social Org Orch,Line 3,5,6,Social unison w/ no dominant inst.
+Musical Org Vocal,Line 4,4,4,Monophony
+Tonal Blend Vocal,Line 5,1,1,Solo
+Rhythm Blend Vocal,Line 6,1,1,Solo
+Music Orch Org,Line 7,7,7,Unison
+Tonal Blenc Orch,Line 8,7,7,Medium blend
+Rhythm Blend Orch,Line 9,4,4,Minimal rhythmic coordination
+Text Repetition,Line 10,1,1,Little or no repetition
+Overall Voc Rhythm,Line 11,13,13,Parlando rubato
+Rhythm Rel'n Vocal,Line 12,1,1,No rhythmic coherence
+Overall Orch Rhythm,Line 13,6,6,Simple meter
+Rythm Rel'n Orch,Line 14,7,7,Accompanying rhythm
+Melodic Shape,Line 15,9,9,Undulating Melody
+Melodic Form,Line 16,1,1,Through-composed
+Phrase Length,Line 17,7,7,Medium length
+No. Phrases,Line 18,1,1,More than 8
+Pos Final Tone,Line 19,1,1,Lowest tone
+Melodic Range,Line 20,4,4,A minor third to a perfect fifth
+Interval Width,Line 21,4,4,Narrow intervals
+Polyphonic Type,Line 22,1,1,No polyphony
+Embellishment,Line 23,1,1,Extreme embellishment
+Tempo,Line 24,6,5,Slow Tempo
+Volume,Line 25,7,7,Mid-volume
+Vocal Rubato,Line 26,1,1,Extreme rubato
+Orch Rubato,Line 27,13,13,No rubato
+Glissando,Line 28,1,1,Maximal glissando
+Melisma,Line 29,1,1,Much melisma
+Tremolo,Line 30,1,1,Much tremolo
+Glottal,Line 31,1,1,Much glottal
+Vocal Register,Line 32,7,7,Mid-voice
+Vocal Width,Line 33,1,1,Very narrow
+Nasality,Line 34,1,1,Extreme nasalization
+Rasp,Line 35,4,4,Pronounced rasp
+Accent,Line 36,7,7,Moderate accent
+Enunciation,Line 37,1,1,Very precise enunciation

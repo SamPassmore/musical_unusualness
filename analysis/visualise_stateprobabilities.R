@@ -104,26 +104,28 @@ song_long = pivot_longer(song_details, cols = starts_with("line_")) %>%
 song_names = song_details$song_id
 
 song_mode = song_long %>% 
-  group_by(short_title) %>% 
-  summarise(modal_value = Mode(thirteen_split))
+  group_by(short_title, var_id) %>% 
+  summarise(modal_value = Mode(thirteen_split),
+            original_mode = Mode(value))
 
-head(song_mode)
+modal_labels = read.csv('data/modal_text.csv')
 
 p = ggplot() + 
   geom_line(data = song_long, aes(x = short_title, y = thirteen_split, group = song_id), col = "grey", alpha = 0.5) + 
   geom_line(data = song_mode, aes(x = short_title, y = modal_value, group = 1), col = "red", lwd = 1.0) + 
   geom_point(data = df, aes(y = thirteen_split, x = short_title, size = frequency), 
              color = "black", fill = "white") + 
-  coord_flip() + 
+  geom_text(data = modal_labels, aes(x = short_title, y = 14, label = text), hjust = 0, size = 5) +
+  coord_flip(clip = 'off') + 
   scale_x_discrete(limits = rev) + 
   xlab(element_blank()) + 
   ylab(element_blank()) + 
   scale_size_continuous(range = c(2, 13)) + 
   theme_minimal(base_size = 24) + 
   theme(legend.position = "bottom",
-        panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
-  labs(size = "Proportion of feature occurance") + 
-  ggtitle("Profile of Malay songs and modal profile")
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        plot.margin = unit(c(1,13,1,1), "lines")) + 
+  labs(size = "Proportion of feature occurance")
 
 ggsave(plot = p, filename = "figures/malay_stateprobabilities.png", height = 400, units = "mm")
 
