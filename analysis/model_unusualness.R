@@ -30,7 +30,6 @@ cantometrics$n_neighbours1000_std = std_variables(cantometrics$n_neighbours_1000
 cantometrics$u_ea_std = std_variables(cantometrics$u_ea)
 cantometrics$u_kinship_std = std_variables(cantometrics$u_kinship)
 cantometrics$u_economy_std = std_variables(cantometrics$u_economy)
-cantometrics$u_housing_std = std_variables(cantometrics$u_housing)
 
 # society variables
 cantometrics$society_loo_mean_std = std_variables(cantometrics$society_loo_mean)
@@ -58,7 +57,6 @@ fit.full = brm(
     nearest_phyloneighbour_std + 
     u_kinship_std + 
     u_economy_std + 
-    u_housing_std + 
     (1|society_id),
   data = cantometrics,
   chains = chains,
@@ -155,17 +153,7 @@ fit.u.e = brm(
 )
 fit.u.e <- add_criterion(fit.u.e, "loo")
 
-fit.u.h = brm(
-  unusualness_region ~ u_housing_std + (1|society_id),
-  data = cantometrics,
-  chains = chains,
-  iter = iter,
-  warmup = warmup, 
-  file = paste0(results_dir, "unusual_housing.rds")
-)
-fit.u.h <- add_criterion(fit.u.h, "loo")
-
-loo(fit.u, fit.u.e, fit.u.h, fit.u.k) # kinship is the best model 
+loo(fit.u, fit.u.e, fit.u.k) # kinship is the best model 
 
 ## Society mean - 1
 fit.society_loo = brm(
@@ -185,7 +173,6 @@ fit.full = brm(
     nearest_phyloneighbour_std + 
     u_kinship_std + 
     u_economy_std + 
-    u_housing_std + 
     society_loo_mean_std,
   data = cantometrics,
   chains = chains,

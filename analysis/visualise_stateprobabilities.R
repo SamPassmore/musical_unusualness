@@ -12,8 +12,31 @@ suppressPackageStartupMessages({
 ## Functions
 Mode <- function(x) {
   ux <- unique(x)
+  tabulate(match(x, ux))
+  
+  
+  
   ux[which.max(tabulate(match(x, ux)))]
 }
+
+Mode = function(x){
+  t = table(x)
+  maxx = which(t == max(t))
+  values = as.numeric(names(t)[maxx])
+  if(length(maxx > 1)){
+    
+    med = median(values)
+    mode = values[which.min(abs(values - med))]
+  } else {
+    mode = values[maxx]
+  }
+  mode
+}
+
+# x = c(1,2,3,4)
+# Mode(x)
+# x = c(1, 1, 2, 4)
+# Mode(x)
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 line_idx = str_detect(colnames(cantometrics), "line_")
@@ -103,3 +126,5 @@ p = ggplot() +
   ggtitle("Profile of Malay songs and modal profile")
 
 ggsave(plot = p, filename = "figures/malay_stateprobabilities.png", height = 400, units = "mm")
+
+

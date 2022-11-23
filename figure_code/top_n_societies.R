@@ -2,7 +2,7 @@ suppressPackageStartupMessages({
   library(dplyr)
   library(ggplot2)
   library(ggridges)
-  })
+})
 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 
@@ -34,8 +34,8 @@ cantometrics_ss = cantometrics_ss[!is.na(cantometrics_ss$society),]
 p = ggplot(data = cantometrics_ss,
        aes(x = unusualness_region,
            y = society)) + 
-  geom_point() + 
   geom_boxplot() + 
+  geom_point(alpha = 0.5) + 
   scale_x_continuous(trans = 'reverse') + 
   ylab('') + 
   xlab('Unusualness') + 
@@ -47,7 +47,6 @@ p = ggplot(data = cantometrics_ss,
                             "Kel Aïr Tuareg" = expression(bold("Kel Aïr Tuareg")),
                             "Moroccan Berbers" = expression(bold("Moroccan Berbers")),
                             parse=TRUE))
-p
 
 ggsave(plot = p, file = "figures/top_n_unusual.png", height = 290, units = "mm")
        
