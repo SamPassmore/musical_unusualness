@@ -84,7 +84,7 @@ map_r = map_r +
 
 #### Histogram
 limit <- quantile(cantometrics[[mapping_variable]], 
-                  0.02, 
+                  0.03, 
                   na.rm = T)  # top 2 %
 
 ## Add lines for Lomax Unusual socieitets
@@ -129,8 +129,9 @@ mh <- map_r +
                 left = 0.2, 
                 top = 0.3)
 
-ggsave("figures/worldmap_region.png", 
+ggsave("figures/figure_1.png", 
        mh, 
        height = 5, 
-       width = 8)
+       width = 8,
+       bg="white")
 

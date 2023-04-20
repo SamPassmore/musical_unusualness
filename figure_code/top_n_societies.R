@@ -48,5 +48,5 @@ p = ggplot(data = cantometrics_ss,
                             "Moroccan Berbers" = expression(bold("Moroccan Berbers")),
                             parse=TRUE))
 
-ggsave(plot = p, file = "figures/top_n_unusual.png", height = 290, units = "mm")
+ggsave(plot = p, file = "figures/figure_2.png", height = 290, width = 210, units = "mm", bg="white")
        

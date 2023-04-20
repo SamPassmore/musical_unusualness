@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 cantometrics = read.csv('processed_data/cantometrics_modeldata.csv')
 
 # Parameters
-chains = 1
+chains = 4
 iter = 4000
 warmup = 2000
 
@@ -167,7 +167,7 @@ fit.society_loo = brm(
 fit.society_loo <- add_criterion(fit.society_loo, "loo")
 
 # full + society
-fit.full = brm(
+fit.full2 = brm(
   unusualness_region ~ 
     n_neighbours500_std + 
     nearest_phyloneighbour_std + 
@@ -181,9 +181,50 @@ fit.full = brm(
   file = paste0(results_dir, "full_andsociety_ri.rds"))
 fit.full <- add_criterion(fit.full, "loo")
 
-
 ## R2 Values
 # full model
 library(performance)
 r2_bayes(fit.full)
 r2_bayes(fit.society_loo)
+
+# Null model comparison
+fit.null =  brm(
+  unusualness_region ~ 1,
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup,
+  file = paste0(results_dir, "nullintercept_ri.rds")
+)
+loo(fit.null, fit.society_loo, fit.full2) # kinship is the best model 
+
+## Does N songs predict unusuanless
+cantometrics = cantometrics %>% 
+  group_by(society_id) %>% 
+  mutate(n_songs = n())
+
+fit.n =  brm(
+  unusualness_region ~ n_songs,
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup,
+  file = paste0(results_dir, "n_songs.rds")
+)
+
+# Does N-songs influence conclusions
+fit.full.3 = brm(
+  unusualness_region ~ 
+    n_neighbours500_std + 
+    nearest_phyloneighbour_std + 
+    u_kinship_std + 
+    u_economy_std + 
+    n_songs + 
+    society_loo_mean_std,
+  data = cantometrics,
+  chains = chains,
+  iter = iter,
+  warmup = warmup,
+  file = paste0(results_dir, "full_andsociety_n_ri.rds"))
+fit.full <- add_criterion(fit.full, "loo")
+

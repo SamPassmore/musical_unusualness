@@ -6,6 +6,7 @@ suppressPackageStartupMessages({
   library(stringr)
   library(tidyr)
   library(ggridges)
+  library(patchwork)
 })
 
 cantometrics = read.csv('processed_data/cantometrics_modeldata.csv')
@@ -24,12 +25,9 @@ colnames(posterior) =  c(
 )
 
 p = mcmc_areas_ridges(posterior, prob = 0.89) + 
-  theme_minimal(base_size = 24) + 
-  theme()
+  theme_minimal(base_size = 15) 
 
-ggsave(plot = p, filename = "figures/model_estimates.png", height = 200, units = "mm")
-
-sjPlot::tab_model(fit.full)
+ggsave(plot = p, filename = "figures/figure_4a.png", height = 100, units = "mm", bg="white")
 
 p2 = ggplot(cantometrics, aes(y = unusualness_region, x = society_loo_mean)) +
   geom_point() + 
@@ -37,11 +35,10 @@ p2 = ggplot(cantometrics, aes(y = unusualness_region, x = society_loo_mean)) +
   xlab("Societal average unusualness (LOO)") + 
   scale_y_continuous(trans = "reverse") + 
   scale_x_continuous(trans = "reverse") + 
-  theme_minimal(base_size = 24) 
+  theme_minimal(base_size = 20) 
 
-ggsave(plot = p2, filename = "figures/society_loo.png", height = 200, units = "mm")
+ggsave(plot = p2, filename = "figures/figure_4b.png", height = 100, units = "mm", bg="white")
 
+p3 = p + p2
 
-cantometrics %>% 
-  group_by(Region) %>% 
-  summarise(mean_unusualness = mean(unusualness_region))
+ggsave(plot = p3, filename = "figures/figure_4.png", height = 200, units = "mm", bg="white")

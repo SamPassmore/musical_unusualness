@@ -34,42 +34,41 @@ unusualness = sapply(lines, function(l){
 cantometrics$unusualness_wholesample = unusualness
 
 #### Calculate Unusualness Score by MacroArea ####
-regions = unique(cantometrics$Region)
-# remove NA regions
-regions = regions[!is.na(regions)]
 
-regional_unusualness = rep(NA, nrow(cantometrics))
-names(regional_unusualness) = cantometrics$song_id
+cat("Calculate Unusualness by Region and society LOO...\n")
 
-cat("Calculate Unusualness by Region...\n")
+regional_unusualness_loo = rep(NA, nrow(cantometrics))
+names(regional_unusualness_loo) = cantometrics$song_id
 
 for(i in seq_along(regions)){
+  cat("Starting", regions[i], "\n")
   
   region_cantometrics = cantometrics %>% 
     dplyr::filter(Region == regions[i])
   
-  n_societies = region_cantometrics %>% 
-    pull(society_id) %>% 
-    n_distinct()
+  song_ids = region_cantometrics$song_id
   
-  regional_stateprobabilities = apply(
-    region_cantometrics[,line_idx],
-    2,
-    function(x){
-      prop.table(table(x))
-    }
-  )
-  
-  unusualness_byregion = sapply(lines, function(l){
-    log(regional_stateprobabilities[[l]][
-      as.character(region_cantometrics[,l])]) 
-  }) %>%
-    rowSums()
-  names(unusualness_byregion) = region_cantometrics$song_id
-  regional_unusualness[
-    match(names(unusualness_byregion), 
-          names(regional_unusualness))] =
-    unusualness_byregion
+  for(j in song_ids){
+    # this song comes from which society
+    society_id = region_cantometrics$society_id[region_cantometrics$song_id == j]
+    r_cantometrics = region_cantometrics[!region_cantometrics$society_id %in% society_id,]
+    song = region_cantometrics[region_cantometrics$song_id %in% j,]
+    regional_stateprobabilities = apply(r_cantometrics[,line_idx],
+                                        2,
+                                        function(x){
+                                          prop.table(table(x))
+                                        }
+    )
+    
+    song_unusualness = sapply(lines, function(l){
+      log(regional_stateprobabilities[[l]][
+        as.character(song[,l])]) 
+    }) %>% sum()
+    
+    if(length(regional_unusualness_loo) != 5484){stop()}
+    
+    regional_unusualness_loo[as.character(j)] = song_unusualness
+  }
 }
 
 
@@ -123,9 +122,9 @@ for(i in seq_along(language_families)){
 
 ## Add unusualness to dataset
 cantometrics$unusualness_region[
-  match(names(regional_unusualness), 
+  match(names(regional_unusualness_loo), 
         cantometrics$song_id)
-] = regional_unusualness
+] = regional_unusualness_loo
 
 cantometrics$unusualness_languagefamily[
   match(names(languagefamily_unusualness), 

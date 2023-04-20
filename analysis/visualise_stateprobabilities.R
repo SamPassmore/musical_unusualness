@@ -10,15 +10,6 @@ suppressPackageStartupMessages({
 
 
 ## Functions
-Mode <- function(x) {
-  ux <- unique(x)
-  tabulate(match(x, ux))
-  
-  
-  
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
 Mode = function(x){
   t = table(x)
   maxx = which(t == max(t))
@@ -37,7 +28,7 @@ Mode = function(x){
 # Mode(x)
 # x = c(1, 1, 2, 4)
 # Mode(x)
-
+ 
 cantometrics = read.csv('processed_data/cantometrics_wunusualness.csv')
 line_idx = str_detect(colnames(cantometrics), "line_")
 
@@ -74,9 +65,10 @@ state_probabilities_df$state =
 df <- state_probabilities_df %>% 
   group_by(state, var_id) %>%
   summarize(frequency = sum(frequency)) %>% 
+  ungroup() %>% 
   group_by(var_id) %>% 
   mutate(n_states = n(),
-         thirteen_split = as.numeric(cut(1:n_states, 13, labels = FALSE))) %>% 
+         thirteen_split = as.numeric(cut(1:n_states[1], 13, labels = FALSE))) %>% 
   left_join(., y_labels, by = c("var_id" = "id")) %>% 
   mutate(state = factor(state, levels = 1:max(as.numeric(state))),
         var_id = str_replace(var_id, "_", " "),
@@ -88,6 +80,9 @@ df <- state_probabilities_df %>%
 
 rescale_states = df %>% 
   select(state, var_id, short_title, thirteen_split)
+
+# reorder levels of the factor to reflect Cantometric levels
+levels(df$short_title)
 
 ## Get songs of interest 
 society_ofinterest = c(20571)
@@ -109,6 +104,7 @@ song_mode = song_long %>%
             original_mode = Mode(value))
 
 modal_labels = read.csv('data/modal_text.csv')
+levels(modal_labels$short_title) = levels(df$short_title)
 
 p = ggplot() + 
   geom_line(data = song_long, aes(x = short_title, y = thirteen_split, group = song_id), col = "grey", alpha = 0.5) + 
@@ -127,6 +123,6 @@ p = ggplot() +
         plot.margin = unit(c(1,13,1,1), "lines")) + 
   labs(size = "Proportion of feature occurance")
 
-ggsave(plot = p, filename = "figures/malay_stateprobabilities.png", height = 400, units = "mm")
+ggsave(plot = p, filename = "figures/figure_3.png", height = 400, width = 400, units = "mm", bg = "white")
 
 

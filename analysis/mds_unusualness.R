@@ -14,9 +14,7 @@ tsne_out = tsne(cantometrics_dist)
 
 plot_df = data.frame(
   x_mds = mds_out[,1],
-  y_mds = mds_out[,2],
-  x_tsne = 
-  y_tsne = 
+  y_mds = mds_out[,2]
   )
 
 plot_df = cbind(plot_df, cantometrics)
@@ -52,9 +50,7 @@ tsne_out_woqr = tsne(cantometrics_dist_worv)
 
 plot_dfworv = data.frame(
   x_mds = mds_out[,1],
-  y_mds = mds_out[,2],
-  x_tsne = 
-  y_tsne = 
+  y_mds = mds_out[,2]
 )
 
 plot_dfworv = cbind(plot_dfworv, cantometrics)
