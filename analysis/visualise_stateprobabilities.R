@@ -123,6 +123,6 @@ p = ggplot() +
         plot.margin = unit(c(1,13,1,1), "lines")) + 
   labs(size = "Proportion of feature occurance")
 
-ggsave(plot = p, filename = "figures/figure_3.png", height = 400, width = 400, units = "mm", bg = "white")
+ggsave(plot = p, filename = "figures/figure_4.png", height = 400, width = 400, units = "mm", bg = "white")
 
 

@@ -41,4 +41,4 @@ ggsave(plot = p2, filename = "figures/figure_4b.png", height = 100, units = "mm"
 
 p3 = p + p2
 
-ggsave(plot = p3, filename = "figures/figure_4.png", height = 200, units = "mm", bg="white")
+ggsave(plot = p3, filename = "figures/figure_5.png", width = 400, units = "mm", bg="white")

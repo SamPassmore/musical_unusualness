@@ -19,7 +19,8 @@ cantometrics_societies = cantometrics %>%
     Society_latitude = mean(Society_latitude),
     Society_longitude = ifelse(Society_longitude <= -25, 
                                 Society_longitude + 360,
-                                Society_longitude)
+                                Society_longitude),
+    Region = first(Region)
   ) %>% 
   distinct(.keep_all = TRUE) %>%
   dplyr::filter(song_count >= 5)
@@ -135,3 +136,60 @@ ggsave("figures/figure_1.png",
        width = 8,
        bg="white")
 
+
+## Map with only one region outlied
+cantometrics_societies$display_region = ifelse(cantometrics_societies$Region == "South America", "South America", "Not SA")
+
+pp = basemap + 
+  geom_point(data = cantometrics_societies,
+             aes(x = Society_longitude,
+                 y = Society_latitude,
+                 col = display_region),
+             alpha = 0.6) +
+  scale_color_manual(values = c(
+    "South America" = "red",
+    "Not SA" = "grey60"
+  )) + 
+  ylim(c(-55, 45)) + 
+  xlim(c(225, 355)) + 
+  theme(legend.position = "none")
+
+pp
+
+ggsave("figures/map_SA.png", 
+       pp, 
+       height = 5, 
+       width = 8,
+       bg="white")
+
+
+cantometrics_societies$one_society = ifelse(cantometrics_societies$society_id == 19064, "Canela", "Not Canela")
+
+pp = basemap + 
+  geom_point(data = cantometrics_societies,
+             aes(x = Society_longitude,
+                 y = Society_latitude,
+                 col = one_society,
+                 shape = display_region),
+             alpha = 0.6) +
+  geom_point(data = cantometrics_societies[cantometrics_societies$one_society == "Canela",],
+             aes(x = Society_longitude,
+                 y = Society_latitude),
+             size = 3,
+             col = "red") +
+  scale_color_manual(values = c(
+    "Canela" = "red",
+    "Not Canela" = "grey60"
+  )) + 
+  scale_shape_manual(values=c(4, 19)) + 
+  ylim(c(-55, 45)) + 
+  xlim(c(225, 355)) + 
+  theme(legend.position = "none")
+
+pp
+
+ggsave("figures/map_SA2.png", 
+       pp, 
+       height = 5, 
+       width = 8,
+       bg="white")

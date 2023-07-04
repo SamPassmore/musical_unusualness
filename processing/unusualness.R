@@ -37,6 +37,11 @@ cantometrics$unusualness_wholesample = unusualness
 
 cat("Calculate Unusualness by Region and society LOO...\n")
 
+#### Calculate Unusualness Score by MacroArea ####
+regions = unique(cantometrics$Region)
+# remove NA regions
+regions = regions[!is.na(regions)]
+
 regional_unusualness_loo = rep(NA, nrow(cantometrics))
 names(regional_unusualness_loo) = cantometrics$song_id
 
@@ -96,7 +101,7 @@ for(i in seq_along(language_families)){
     # So follow Skirgård et al and use regional scores 
     id = lf_cantometrics$song_id
     languagefamily_unusualness[as.character(id)] = 
-      regional_unusualness[as.character(id)]
+      regional_unusualness_loo[as.character(id)]
   } else {
     lf_stateprobabilities = apply(
       lf_cantometrics[,line_idx],
